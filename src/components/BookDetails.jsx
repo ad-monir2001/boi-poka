@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
 import { addToStoredReadList } from './utilities/addToDb';
+import { addToWishList } from './utilities/addToWhiteList';
 
 const BookDetails = () => {
   const { bookId } = useParams();
@@ -18,10 +19,21 @@ const BookDetails = () => {
     totalPages,
     yearOfPublishing,
   } = book;
-  
+
   const handleMarkAsRead = (id) => {
     addToStoredReadList(id);
   };
+
+  const handleAddToWhiteList = (id) => {
+    addToWishList(id)
+  }
+
+
+
+
+
+
+
   return (
     <div className="container mx-auto flex gap-7 my-14">
       <div className="bg-[#F3F3F3] rounded-lg p-6 flex items-center justify-center w-1/2">
@@ -49,7 +61,7 @@ const BookDetails = () => {
           >
             Mark as Read
           </button>
-          <button className="btn btn-accent text-white">Add to WishList</button>
+          <button onClick={() => handleAddToWhiteList(id)} className="btn btn-accent text-white">Add to WishList</button>
         </div>
       </div>
     </div>
