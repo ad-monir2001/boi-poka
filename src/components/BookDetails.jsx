@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
+import { addToStoredReadList } from './utilities/addToDb';
 
 const BookDetails = () => {
   const { bookId } = useParams();
@@ -17,7 +18,10 @@ const BookDetails = () => {
     totalPages,
     yearOfPublishing,
   } = book;
-
+  
+  const handleMarkAsRead = (id) => {
+    addToStoredReadList(id);
+  };
   return (
     <div className="container mx-auto flex gap-7 my-14">
       <div className="bg-[#F3F3F3] rounded-lg p-6 flex items-center justify-center w-1/2">
@@ -39,12 +43,17 @@ const BookDetails = () => {
         <p>Rating: {rating}</p>
         <hr />
         <div className="flex gap-4">
-          <button className="btn btn-accent btn-outline">Mark as Read</button>
+          <button
+            className="btn btn-accent btn-outline"
+            onClick={() => handleMarkAsRead(id)}
+          >
+            Mark as Read
+          </button>
           <button className="btn btn-accent text-white">Add to WishList</button>
         </div>
       </div>
     </div>
   );
-}; 
+};
 
 export default BookDetails;
